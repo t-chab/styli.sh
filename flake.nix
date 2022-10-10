@@ -5,7 +5,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        script-name = "styli.sh";
+        script-name = "stylish";
         script-buildInputs = with pkgs; [ feh ];
         script-src = builtins.readFile ./styli.sh;
         script = (pkgs.writeScriptBin script-name script-src).overrideAttrs
@@ -14,7 +14,7 @@
               ${old.buildCommand}
                patchShebangs $out'';
           });
-        packageName = "styli.sh";
+        packageName = "stylish";
       in rec {
         defaultPackage = self.packages.${system}.${packageName};
         packages.${packageName} = pkgs.symlinkJoin {
@@ -22,7 +22,7 @@
           paths = [ script ] ++ script-buildInputs;
           buildInputs = [ pkgs.makeWrapper ];
           postBuild =
-            "wrapProgram $out/bin/${my-name} --prefix PATH : $out/bin";
+            "wrapProgram $out/bin/${script-name} --prefix PATH : $out/bin";
         };
       });
 }

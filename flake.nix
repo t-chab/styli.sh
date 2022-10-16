@@ -16,7 +16,7 @@
           });
         packageName = "stylish";
       in rec {
-        defaultPackage = self.packages.${system}.${packageName};
+        packages.${system} = self.packages.${system}.${packageName};
         packages.${packageName} = pkgs.symlinkJoin {
           name = script-name;
           paths = [ script ] ++ script-buildInputs;

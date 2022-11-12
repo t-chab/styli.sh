@@ -6,7 +6,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
         script-name = "stylish";
-        script-buildInputs = with pkgs; [ feh ];
+        script-buildInputs = with pkgs; [ ];
         script-src = builtins.readFile ./styli.sh;
         script = (pkgs.writeScriptBin script-name script-src).overrideAttrs
           (old: {
